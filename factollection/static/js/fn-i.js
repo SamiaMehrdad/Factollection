@@ -39,20 +39,46 @@ function makeRequest()
 function subjectChanged()
 {
     let value = subjectEl.value;
-    let newChar = value.charAt( value.length-1);
+    let n = value.length-1;
+    let newChar = value.charAt( n );
+
     if(radioSelector !== "date")
     {
         if( isNaN(newChar) )
             subjectEl.value = value.slice(0, -1);
     }
-    else // this is a date
+    else // user is in date entry mode
     {
-        // if( isNaN(newChar) )///TOOD: 
-            if( isNaN(newChar) && ( newChar !== '/' || ( value.length !== 2 && value.length !==3)) )
-                subjectEl.value = value.slice(0, -1);
+        if(n > 4)
+        {
+            subjectEl.value = value.slice(0, -1);
+            return;
+        }
+        switch (n)
+        {
+            case 0: 
+                if( isNaN(newChar) )
+                    subjectEl.value = value.slice(0, -1);
+            break;
+            case 1:
+                if( isNaN(newChar) || parseInt(newChar)>2 )
+                    subjectEl.value = value.slice(0, -1);
+                else
+                    subjectEl.value += '/';    
+                if(newChar === '/')
+                    subjectEl.value = '0' + subjectEl.value + '/';
+            break ; 
+            case 3:
+                if( isNaN(newChar) )
+                    subjectEl.value = value.slice(0, -1);
+            break;
+            case 4:
+                if( isNaN(newChar) || ( parseInt(subjectEl.value[n-1]) > 3 && parseInt(newChar) > 1 )) ///BUG: strange behave for 3x
+                    subjectEl.value = value.slice(0, -1);
+            break;        
+        }
     }
-
-    console.log(value);
+    
 } 
 /**-------------------------------
  *  subjectChanged() process and filter subject entry based on radios

@@ -101,7 +101,7 @@ body{
     display: inline-block;
 }
 #welcome{
-    height: 28.5vw;
+    height: 33vw;
 }
 #today-fact{
     text-align: left;
@@ -193,7 +193,7 @@ a{
     position: fixed;
     width: 30vw;
     height: 5vh;
-    top: 70.5vh;
+    top: 75.5vh;
     left: 36.6vw;
     padding: 0;
 }
@@ -281,7 +281,7 @@ a{
     padding: .5vw 0 0 1vw ;
     height: 10vw;
     font-family: caveat;
-    overflow: hidden;
+    overflow: auto;
     color: var(--brn);
     font-size: 1.4vw;
 }
@@ -316,7 +316,7 @@ a{
     position: fixed;
     display: inline-block;
     width: 26vw;
-    height: 50vh;
+    height: 30vw;
     top: 9vh;
     left: 38vw;
     overflow: auto;
