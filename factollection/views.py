@@ -27,7 +27,7 @@ def index(request):
 def home(request):   
     #api call for random trivia fact and date fact for today
     date_fact = Fact_API.date_fact_today()
-    trivia_fact = Fact_API.trivia_fact() 
+    trivia_fact = Fact_API.trivia_fact_random() 
     print(date_fact)
     context = {'date_fact' :date_fact, 
                 'trivia_fact' :trivia_fact,}
