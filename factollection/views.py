@@ -10,14 +10,17 @@ import json
 
 
 @login_required(login_url='loginPage')
-def get_user_sheets(request):
+def index(request):
     # get the AuthUser and call the sheet and related facts and links
     user_id = AuthUser.objects.get(id = request.user.id)
-    sheet = UserSheet.objects.get(auth_user = user_id.id)
-    facts = UserSheet.get_user_sheet_facts(user_id.id)
-    links = UserSheet.get_user_sheet_links(user_id.id)
-    context = {'facts' :facts, 'links' :links, 'sheet' :sheet}
-    return render(request,'index.html', context)
+    sheets = UserSheet.objects.all().filter(auth_user = user_id.id) 
+    data_list = []
+    for sheet in sheets:
+        facts = list(UserSheet.get_user_sheet_facts(sheet.id))
+        links = list(UserSheet.get_user_sheet_links(sheet.id))
+        sheet_list = {'sheet' :sheet, 'facts' :facts, 'links' :links,}
+        data_list.append(sheet_list)
+    return render(request,'index.html', {'data' :data_list})
 
 @login_required(login_url='loginPage')
 def home(request):
