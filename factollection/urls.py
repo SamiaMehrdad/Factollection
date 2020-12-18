@@ -9,4 +9,5 @@ urlpatterns = [
     path('logout/', views.logoutUser, name='logout'),
     path('home/', views.home, name='home'),
     path('index/', views.index, name='index'),
+    path('details/<int:user_sheet_id>', views.sheet_detail, name='sheet_detail')
 ]
