@@ -1,11 +1,24 @@
 from django.db import models
 from django.db.models.fields import AutoField
+from datetime import date
 import requests
 import random    
-class Fact_API():   
+class Fact_API():  
+     
     def date_fact(month, day):
         response = requests.get(f'http://numbersapi.com/{month}/{day}/date?json')
         return response.json()
+
+    def date_fact_today():
+        today = date.today()
+        day = today.strftime('%d')
+        month = today.strftime('%m')
+        month_abbrv = today.strftime('%b')
+        response = requests.get(f'http://numbersapi.com/{month}/{day}/date?json')
+        data = response.json()
+        data['month_abbrv'] = month_abbrv
+        data['day'] = day
+        return data
 
     # call api for random trivia fact
     def trivia_fact():
