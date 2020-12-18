@@ -24,19 +24,13 @@ def index(request):
     return render(request,'index.html', {'data' :data_list, 'user' :request.user})
 
 # @login_required(login_url='loginPage')
-def home(request):
-    #get todays date to pass into the view and Date_Fact Fucntion
-    today = date.today()
-    day = today.strftime('%d')
-    month = today.strftime('%m')
-    #api call for random trivia fact and date fact
-    date_fact = Fact_API.date_fact(month,day)
-    trivia_fact = Fact_API.trivia_fact()
-    month_abbrev = today.strftime('%b') 
+def home(request):   
+    #api call for random trivia fact and date fact for today
+    date_fact = Fact_API.date_fact_today()
+    trivia_fact = Fact_API.trivia_fact() 
+    print(date_fact)
     context = {'date_fact' :date_fact, 
-                'trivia_fact' :trivia_fact, 
-                'month' :month_abbrev, 
-                'day' :day}
+                'trivia_fact' :trivia_fact,}
     return render(request, 'home.html', context)
 
 def register(request):
