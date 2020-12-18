@@ -4,7 +4,14 @@ from datetime import date
 import requests
 import random    
 class Fact_API():  
-     
+    def math_fact(num):
+        response = requests.get(f'http://numbersapi.com/{num}/math?json')
+        return response.json()
+
+    def year_fact(year):
+        response = requests.get(f'http://numbersapi.com/{year}/year?json')
+        return response.json()
+
     def date_fact(month, day):
         response = requests.get(f'http://numbersapi.com/{month}/{day}/date?json')
         return response.json()
@@ -19,10 +26,17 @@ class Fact_API():
         data['month_abbrv'] = month_abbrv
         data['day'] = day
         return data
+    
+    def trivia_fact(num):
+        response = requests.get(f'http://numbersapi.com/{num}/?json')
+        return response.json()
 
     # call api for random trivia fact
-    def trivia_fact():
-        num = random.randint(0, 99)
+    def trivia_fact_random(min = None, max = None):
+        if min == None or max == None:
+            num = random.randint(0, 99)
+        else:
+            num = random.randint(min, max)
         response = requests.get(f'http://numbersapi.com/{num}/?json')
         fact = response.json()
         # if the number has no fact rerun the function
