@@ -17,10 +17,11 @@ def index(request):
     data_list = []
     for sheet in sheets:
         facts = list(UserSheet.get_user_sheet_facts(sheet.id))
-        links = list(UserSheet.get_user_sheet_links(sheet.id))
-        sheet_list = {'sheet' :sheet, 'facts' :facts, 'links' :links,}
+        sheet_list = {'sheet' :sheet, 'facts' :facts}
         data_list.append(sheet_list)
-    return render(request,'index.html', {'data' :data_list})
+    for sheet in data_list:
+        sheet['fact_length'] = len(sheet['facts'])
+    return render(request,'index.html', {'data' :data_list, 'user' :request.user})
 
 # @login_required(login_url='loginPage')
 def home(request):
@@ -74,6 +75,18 @@ def loginPage(request):
 def logoutUser(request):
     logout(request)
     return redirect('/loginPage/')
+
+
+
+def sheet_detail(request, user_sheet_id):
+    sheet = UserSheet.objects.get(id = user_sheet_id)
+    facts = list(UserSheet.get_user_sheet_facts(sheet.id))
+    links = list(UserSheet.get_user_sheet_links(sheet.id))
+    context = {'sheet' :sheet, 'facts': facts, 'links' :links}
+    return render(request, 'details.html', context)
+
+
+
 
 ############################### HELPING FUNCTIONS ###############################
 

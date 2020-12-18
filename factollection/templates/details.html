@@ -20,7 +20,7 @@
 <!-- Fixed part. never change end  -->
         <div id="top-bar">
             <p id="det-del-fact" class="icon clickable">&#x1f5d1;</p>
-            <p id="det-subject">{Subj}</p>
+            <p id="det-subject"> {{ sheet.subject }}</p>
             <div id="top-label-det" class="orange-bar left">Details
                 <p id="category" class="clickable">No Category &#9660;</p>
             </div>
@@ -33,14 +33,16 @@
                 </p>
             </div>
             <div id="top-label-note" class="orange-bar left">Notes
-               <textarea id="fact-note" name="notes">{{notes}}</textarea>
+               <textarea id="fact-note" name="notes">{{ sheet.note }}</textarea>
             </div>
             <div id="top-label-links" class="orange-bar left">Links
             <input id="add-link" type="submit" class="clickable link" value="+">    
                 <div id="links-area">
                     <!-- Loop starts here for each saved link  -->
-                    <a href={link_url} id={link_n}>{link_label}</a>
-                        <!-- There is non-breakable spaces here. Don't change these two lines -->
+                    {% for link in links %}
+                    <a href={{ link.url }} target='_blank' id='{{ link.id }}'> {{ link.title }}</a>
+                    {% endfor %}
+                        <!-- There is non-breakable spaces here. Dont change these two lines -->
                     <span class="clickable">    &#x1f589;</span> 
                     <span class="clickable">    &#x1f5d1;</span>
                     <br>

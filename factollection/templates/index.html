@@ -1,50 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FACTOLLECTION a personal fun fact collector</title>
-    <link rel="icon" href="../static/img/fn.png">
-    <link rel="stylesheet" href="../static/css/fn.css">
+    <link rel="icon" href="../static/img/fn.png" />
+    <link rel="stylesheet" href="../static/css/fn.css" />
     <script defer src="../static/js/fn-i.js"></script>
-</head>
-<body>
-<!-- Fixed part. never change start -->
+  </head>
+  <body>
+    <!-- Fixed part. never change start -->
     <div id="middle">
-        <p id="logo-first" class="watermark">F</p>
-        <p id="logo-mid" class="watermark logged">ACTOLLECTIO</p>
-        <p id="logo-last" class="watermark">N</p>
-        <p id="slogan" class="watermark logged">Personal Fun Fact Collection</p>
+      <p id="logo-first" class="watermark">F</p>
+      <p id="logo-mid" class="watermark logged">ACTOLLECTIO</p>
+      <p id="logo-last" class="watermark">N</p>
+      <p id="slogan" class="watermark logged">Personal Fun Fact Collection</p>
     </div>
     <div id="middle-up">
-<!-- Fixed part. never change end  -->
-        <p id="welcome" class="mid-orange">Welcome<br>{username}<br><br><br></p>
-        <div id="top-label" class="orange-bar">Saved Facts</div>
-        <div id="index-box">
-            <!-- loop through notes or first saved fact of all saved sheets start -->
-            <p id="f0" class="fact-list">&#9654;{subj} :: {fact_or_note}<span class="icon"> {n} </span></p>
-            <!-- loop through notes or first saved fact of all saved sheets end -->
-        </div>
+      <!-- Fixed part. never change end  -->
+      <p id="welcome" class="mid-orange">
+        Welcome<br />{{user}}<br /><br /><br />
+      </p>
+      <div id="top-label" class="orange-bar">Saved Facts</div>
+      <div id="index-box">
+        <!-- loop through notes or first saved fact of all saved sheets start -->
+        {% for dict in data %}
+        <a href='/details/{{ dict.sheet.id }}'
+        <p id="f0" class="fact-list">
+          &#9654; {{ dict.sheet.subject }}:: {{ dict.sheet.note }}<span class="icon"> {{ dict.fact_length }}</span>
+        </p>
+        {% endfor %}
+        <!-- loop through notes or first saved fact of all saved sheets end -->
+      </div>
     </div>
     <div id="selectors">
-        <div id="all" class="tab">ALL</div>
-        <div id="trivia" class="tab selected">TRIVIA</div>
-        <div id="math" class="tab">MATH</div>
-        <div id="date" class="tab">DATE</div>
-        <input id="subject" type="text">
-        <input id = "go-btn" class="clickable link" value="Go" type="submit">
+      <div id="all" class="tab">ALL</div>
+      <div id="trivia" class="tab selected">TRIVIA</div>
+      <div id="math" class="tab">MATH</div>
+      <div id="date" class="tab">DATE</div>
+      <input id="subject" type="text" />
+      <input id="go-btn" class="clickable link" value="Go" type="submit" />
     </div>
     <div id="bottom-band">
-        <p id="left-nav" class="fix big clickable"> < </p>
-        <div id="bottom-container">
-          <p id="about-random">About{11}:</p>
-          <!-- it may needs to be a form and submit input here -->
-          <a href="" class="clickable" id="save-fact"> Save </a>
-          <p id="fact-res"> {Also this is another info panel about a random two digit number
-                         and for this one also it should be covering three lines, like this.}
-          </p> 
-        </div>
-        <p id="right-nav" class="fix big clickable"> > </p>
+      <p id="left-nav" class="fix big clickable"><</p>
+      <div id="bottom-container">
+        <p id="about-random">About{11}:</p>
+        <!-- it may needs to be a form and submit input here -->
+        <a href="" class="clickable" id="save-fact"> Save </a>
+        <p id="fact-res">
+           {Also this is another info panel about a random two digit number and
+          for this one also it should be covering three lines, like this.}
+        </p>
+      </div>
+      <form method="post">
+        {% csrf_token %} {{ form.as_p }}
+        <input type="submit" value="Save" />
+      </form>
+      <p id="right-nav" class="fix big clickable">></p>
     </div>
     <x id="data-facts" data={{data}}></x>
 </body>
