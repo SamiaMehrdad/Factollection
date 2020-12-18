@@ -70,13 +70,13 @@ class UserSheet(models.Model):
     note = models.CharField(max_length=250, blank=True, null=True)
     
     # get all facts for the current sheet
-    def get_user_sheet_facts(auth_user_id):
-        user_sheet = UserSheet.objects.get(auth_user = auth_user_id)
+    def get_user_sheet_facts(user_sheet_id):
+        user_sheet = UserSheet.objects.get(id = user_sheet_id)
         facts = user_sheet.fact_set.all()
         return facts
     # get all links for the current sheet
-    def get_user_sheet_links(auth_user_id):
-        user_sheet = UserSheet.objects.get(auth_user = auth_user_id)
+    def get_user_sheet_links(user_sheet_id):
+        user_sheet = UserSheet.objects.get(id = user_sheet_id)
         links = user_sheet.link_set.all()
         return links
 
