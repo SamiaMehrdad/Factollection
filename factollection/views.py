@@ -19,7 +19,7 @@ def get_user_sheets(request):
     context = {'facts' :facts, 'links' :links, 'sheet' :sheet}
     return render(request,'index.html', context)
 
-@login_required(login_url='loginPage')
+# @login_required(login_url='loginPage')
 def home(request):
     #get todays date to pass into the view and Date_Fact Fucntion
     today = date.today()
