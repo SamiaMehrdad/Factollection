@@ -26,14 +26,15 @@
         </p>
     </div>
     <div id="bottom-band">
-        <p id="left-nav" class="fix big clickable"> < </p>
+        <!-- <p id="left-nav" class="fix big clickable"> < </p> -->
         <div id="bottom-container">
           <p id="about-random">About {{ trivia_fact.number }}:</p>
           <a href="/loginPage/" class="clickable"> Save </a>
+          <a href="/" class="clickable" id="shuffle"> Shuffle </a>
           <p id="fact-res">{{ trivia_fact.text }}
           </p> 
         </div>
-        <p id="right-nav" class="fix big clickable"> > </p>
+        <!-- <p id="shuffle" class="clickable"> Shuffle </p> -->
     </div>
 </body>
 </html>

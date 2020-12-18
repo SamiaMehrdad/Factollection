@@ -11,10 +11,12 @@
 /*----- constants ---------------------------------------------------*/
 const ENUMRADIO = ["all", "trivia", "math", "date"];
 /*----- app's state (variables) -------------------------------------*/
-let radioSelector = 0;
+let radioSelector = "trivia";
 /*----- cached element references -----------------------------------*/
 const subjectEl = getElemById("subject");
 const radioEls = document.querySelectorAll(".tab");
+const dataEl = getElemById("data-facts");
+console.log(dataEl.getAttribute("data"));
 /*----- event listeners -----------------------------------------------------*/
 setEvent("go-btn", "click", makeRequest );
 setEvent("subject", "input",subjectChanged);
@@ -28,7 +30,25 @@ radioEls.forEach(tab=>{setEvent(tab.id,"click", radioClicked);});
  *-------------------------------*/
 function makeRequest()
 {
- let a=1;
+ let subject = subjectEl.value;
+ if(radioSelector == "all")
+ {
+     if ( !subject )
+        radioSelector = ENUMRADIO [ Math.floor(Math.random()*3) +1]
+     else
+        radioSelector = ENUMRADIO [ Math.floor(Math.random()*2) +1] 
+ }
+ if( ! subject )
+    if (radioSelector != "date")
+        subject = Math.floor( Math.random() * 1000 );
+    else
+    {
+        subject = Math.floor( Math.random() * 11 ) +1;
+        subject = subject.toString() + '/' + Math.floor( Math.random() * 30 );   
+    }    
+  subject = radioSelector + ',' + subject ;
+  postData(' ', subject);  
+  console.log( subject);
 }    
 
 /**-------------------------------
@@ -109,6 +129,20 @@ function radioClicked(e)
     subjectEl.value = "";
     subjectEl.select();
 } 
+
+/**-------------------------------
+ *  postData( url, data ) send a post data
+ *  Show useful console log 
+ *  *return: None
+ *-------------------------------*/
+function postData( url, data )
+{
+    fetch(url , {
+        method: 'POST',
+        body: JSON.stringify(data)
+    }).then(res => res.json()).then((d) => console.log(d));
+}
+
 /**-------------------------------
  *  getElemById(id) Make life a little easier.
  *  Show useful console log on errors

@@ -301,6 +301,9 @@ a{
 #right-nav{
     left: 40vw;
 }
+#shuffle{
+    margin: 2vw -.8vw;
+}
 #det-next{
     left:73vw;
 }

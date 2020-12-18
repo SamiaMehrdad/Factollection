@@ -75,3 +75,29 @@ def logoutUser(request):
     logout(request)
     return redirect('/loginPage/')
 
+############################### HELPING FUNCTIONS ###############################
+
+''' 
+normalize( str, len )
+this function returns a string that is equal to
+str, but with a fixed length of len
+return : string
+'''
+def normalize( str, length ):
+    # if str is too ling, truncate and add '...' to the end
+    if len(str) >= length :
+        return str[0:length-3]+"..."
+    # else, str is too short, add non-breakable space to the end    
+    else:
+        return str + chr(255) * ( length -len(str) )
+
+
+'''
+get_all_facts( subject, type )
+this function will send multiple requests to api ,
+ignoring repeating results, return a list of all facts
+attemping to request api should be limited to ?
+parameters: subject: number or date | type:"Math","Trivia" or "Date"
+'''
+def get_all_facts( subject, type ):
+    pass
