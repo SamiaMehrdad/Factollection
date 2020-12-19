@@ -21,7 +21,9 @@ def index(request):
         data_list.append(sheet_list)
     for sheet in data_list:
         sheet['fact_length'] = len(sheet['facts'])
-    return render(request,'index.html', {'data' :data_list, 'user' :request.user})
+    random_fact = Fact_API.trivia_fact_random()
+    #random_fact['text'] = normalize(random_fact['text'], 255)
+    return render(request,'index.html', {'data' :data_list, 'user' :request.user, 'random_fact' :random_fact})
 
 # @login_required(login_url='loginPage')
 def home(request):   

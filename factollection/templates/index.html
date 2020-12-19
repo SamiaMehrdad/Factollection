@@ -44,12 +44,11 @@
     <div id="bottom-band">
       <p id="left-nav" class="fix big clickable"><</p>
       <div id="bottom-container">
-        <p id="about-random">About{11}:</p>
+        <p id="about-random">About {{ random_fact.number }}:</p>
         <!-- it may needs to be a form and submit input here -->
         <a href="" class="clickable" id="save-fact"> Save </a>
         <p id="fact-res">
-           {Also this is another info panel about a random two digit number and
-          for this one also it should be covering three lines, like this.}
+           {{ random_fact.text }}
         </p>
       </div>
       <p id="right-nav" class="fix big clickable">></p>
