@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FACTOLLECTION a personal fun fact collector</title>
-    <link rel="icon" href="../static/img/fn.png" />
-    <link rel="stylesheet" href="../static/css/fn.css" />
-    <script defer src="../static/js/fn-i.js"></script>
+    <link rel="icon" href="{% static 'img/fn.png' %}">
+    <link rel="stylesheet" href="{% static 'css/fn.css' %}" />
+    <script defer src="{% static 'js/fn-i.js' %}"></script> 
   </head>
   <body>
     <!-- Fixed part. never change start -->
@@ -19,13 +20,17 @@
     <div id="middle-up">
       <!-- Fixed part. never change end  -->
       <p id="welcome" class="mid-orange">
-        Welcome<br />{{user}}<br /><br /><br />
+        Welcome<br />{{user}}<br />
+        <a href="/logout" class="clickable">Log out</a> <br /><br />
       </p>
+      
       <div id="top-label" class="orange-bar">Saved Facts</div>
       <div id="index-box">
         <!-- loop through notes or first saved fact of all saved sheets start -->
         {% for dict in data %}
-        <a href='/details/{{ dict.sheet.id }}'
+        <!-- <a href='/details/{{ dict.sheet.id }}' -->
+            <!-- using Django way !-->
+        <a href="{ % url 'details' dict.sheet.id %}" >
         <p id="f0" class="fact-list">
           &#9654; {{ dict.sheet.subject }}:: {{ dict.sheet.note }}<span class="icon"> {{ dict.fact_length }}</span>
         </p>
@@ -46,7 +51,10 @@
       <div id="bottom-container">
         <p id="about-random">About {{ random_fact.number }}:</p>
         <!-- it may needs to be a form and submit input here -->
-        <a href="" class="clickable" id="save-fact"> Save </a>
+        <form id="add-fact" action="/add/" method="POST">{% csrf_token %}
+        <input id="fact-to-save" class="hidden"> 
+        </form>
+        <a  class="clickable" id="save-fact"> Save </a>
         <p id="fact-res">
            {{ random_fact.text }}
         </p>

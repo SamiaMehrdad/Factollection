@@ -1,13 +1,24 @@
-<h1>Register Form</h1>
-{{ form.errors}}
+<!-- <h1>Register Form</h1> -->
+<link rel="stylesheet" href="../static/css/fn.css" />
+<div id="middle">
+    <p id="logo-first" class="watermark">F</p>
+    <p id="logo-mid" class="watermark ">ACTOLLECTIO</p>
+    <p id="logo-last" class="watermark">N</p>
+    <p id="slogan" class="watermark ">Personal Fun Fact Collection</p>
+  </div>
+  <div id="middle-up">
 
-<form method="POST" action="/register/">
-  {% csrf_token %} 
-  {{ form.first_name.label }} {{ form.first_name }}<br />
-  {{ form.username.label }} {{ form.username }}<br />
-  {{ form.email.label }} {{ form.email }}<br />
-  {{ form.password1.label }} {{ form.password1 }}<br />
-  {{ form.password2.label }} {{ form.password2 }}<br />
-  <input type="submit" name="Create User" />
-</form>
-<a href="/loginPage/">Login Page</a>
+{{ form.errors}}
+<div class="log-form">
+  <form method="POST" action="/register/">
+    {% csrf_token %} 
+    <h2>New User</h2>
+    {{ form.first_name.label }} {{ form.first_name }}<br />
+    {{ form.username.label }} {{ form.username }}<br />
+    {{ form.email.label }} {{ form.email }}<br />
+    {{ form.password1.label }} {{ form.password1 }}<br />
+    {{ form.password2.label }} {{ form.password2 }}<br />
+    <input class="btn" type="submit" name="Create User" />
+  </form>
+  <a href="/loginPage/">Login Page</a>
+</div>

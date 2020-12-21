@@ -11,21 +11,94 @@
 /*----- constants ---------------------------------------------------*/
 
 /*----- app's state (variables) -------------------------------------*/
-
+let factIndex = 0;
+let factsArray = [];
 /*----- cached element references -----------------------------------*/
-const shadeEl = getElemById("shade");
-
+const bottomBandEl = getElemById("bottom-band");
+const bottomAttentionEl = getElemById("bottom-attention");
+const bottomContainerEl = getElemById("index-bottom-container");
+const factEl = getElemById("fact");
+const nextEl = getElemById("det-next");
+const prevEl = getElemById("det-prev");
 /*----- event listeners -----------------------------------------------------*/
-setEvent("helpLabel", "click", showHelp );
-setEvent("levelName", "mouseenter",showResetLevel);
+setEvent("det-next", "click", showNextFact);
+setEvent("det-prev", "click", showPrevFact);
+setEvent("remove","click", removeClicked);
+setEvent("remove-no","click", removeCancel);
+/*------- initializing ------------------------------------------------------*/
+initLists();
+/*----- functions -----------------------------------------------------------*/ 
+function initLists()
+{
+  let facts =getElemById("data-facts").innerText;
+  facts = facts.replaceAll("'",'');
+  factsArray = facts.substring(2, facts.length-2).split(",");
+ console.log(factsArray, factsArray.length);
+}
 
-/*----- functions -----------------------------------------------------------------*/ 
+
 /**-------------------------------
- *  cellClicked() Will be run when a cell is clicked
+ *  showNextFact() Will be run 
  *  * event handler
  *  * return : none
  *-------------------------------*/
+function showNextFact()
+{
+  if( factIndex >= factsArray.length-1 ) 
+    {
+      nextEl.classList.add("hidden");
+      prevEl.classList.remove("hidden");
+    } 
+  else
+    {
+      factIndex++;
+      console.log(factsArray[ factIndex ], typeof(factsArray[ factIndex ]));
+      factEl.innerText = factsArray[ factIndex ];
+    }
+}
+/**-------------------------------
+ *  showPrevFact() Will be run 
+ *  * event handler
+ *  * return : none
+ *-------------------------------*/
+function showPrevFact()
+{
+  if( factIndex <= 0 ) 
+    {
+      prevEl.classList.add("hidden");
+      nextEl.classList.remove("hidden");
+    } 
+  else
+    {
+      factIndex--;
+      console.log(factsArray[ factIndex ], typeof(factsArray[ factIndex ]));
+      factEl.innerText = factsArray[ factIndex ];
+    }
+}
+/**-------------------------------
+ *  removeClicked() Will be run remove is clicked
+ *  * event handler
+ *  * return : none
+ *-------------------------------*/
+function removeClicked()
+{
+  console.log("REMOVE");
+  bottomAttentionEl.classList.remove("hidden");
+  bottomBandEl.classList.add("attention");
+  bottomContainerEl.classList.add("hidden");
+}
 
+/**-------------------------------
+ *  removeCancel() Will be run remove cancel is clicked
+ *  * event handler
+ *  * return : none
+ *-------------------------------*/
+function removeCancel()
+{
+  bottomAttentionEl.classList.add("hidden");
+  bottomBandEl.classList.remove("attention");
+  bottomContainerEl.classList.remove("hidden");
+}
 /**-------------------------------
  *  getElemById(id) Make life a little easier.
  *  Show useful console log on errors
@@ -58,3 +131,4 @@ function setEvent(id , type, funcName)
 }
 
 
+console.log("JS-LOADED");

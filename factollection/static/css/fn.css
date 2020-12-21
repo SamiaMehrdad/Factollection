@@ -24,7 +24,9 @@ body{
     font-size: 1.5vw;
     color: var(--brn);
 }
-
+.hidden{
+    display: none;
+}
 .watermark{
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 10vw;
@@ -39,23 +41,52 @@ body{
 .dark{
     color: var(--brn);
 }
+
+.log-form{
+    border:1px solid var(--orng);
+    /* background-color: black; */
+    display: inline-block;
+    position: fixed;
+    width: 40%;
+    left: 30%;
+    top: 10%;
+    text-align: center;
+    padding: 2vw;
+    background-color: rgba(70,30,0,.5);
+    color: #fff;
+    box-shadow: .5vw .5vw 1vw #555;
+}
+.log-form *{
+    margin: 1vw 0;
+
+}
+.log-form input{
+    height: 2vw;
+    padding: 0 1vw;
+    outline: none;
+    border: none;
+    font-size: 1vw;
+    /* background-color: rgba(255,255,255,.7); */
+    /* background: none; */
+}
 .btn{
- border: 1px solid #fff;
- color: #fff;
- background-color: var(--orng);
- border-radius: .3vw;
- box-shadow: .1vw .2vw .3vw #555;
- padding: .5vw 2vw;
- font-family: Arial, Helvetica, sans-serif;
- text-decoration: none;
-}
+    border: 1px solid #fff;
+    color: #fff;
+    background-color: var(--orng);
+    border-radius: .3vw;
+    box-shadow: .1vw .2vw .3vw #555;
+    padding: .5vw 2vw;
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    cursor: pointer;
+   }
 .btn:hover{
-    opacity: .7;
-}
+       opacity: .7;
+   }
 .btn:active{
-    box-shadow: none;
-    opacity: 1;
-}
+       box-shadow: none;
+       opacity: 1;
+   }
 #middle{
     position: fixed;
     top: 10vw;
@@ -85,7 +116,7 @@ body{
     width: 100%;
     height: 16vh;
     border: 1px solid #fff;
-
+    transition: all .5s;
 }
 #middle-up{
     position: fixed;
@@ -140,6 +171,21 @@ a{
     padding: 1vw;
     top: 85vh;
 }
+#bottom-attention{
+    position: fixed;
+    left: 20vw;
+    padding: 1.5vw 3vw;
+}
+
+#bottom-attention p{
+    display: inline-block;
+    margin: 1vw 2vw;
+}
+
+.attention{
+    background-color: var(--orng);
+}
+
 #remove{
     position: fixed;
     left: 56vw;
@@ -177,6 +223,7 @@ a{
 .clickable{
     cursor: pointer;
     font-weight: bolder;
+    display: inline-block;
 }
 .clickable:hover{
     text-shadow: .1vw .15vw .2vw #777;

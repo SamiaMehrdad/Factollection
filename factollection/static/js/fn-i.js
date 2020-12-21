@@ -16,39 +16,60 @@ let radioSelector = "trivia";
 const subjectEl = getElemById("subject");
 const radioEls = document.querySelectorAll(".tab");
 const dataEl = getElemById("data-facts");
-console.log(dataEl.getAttribute("data"));
+//console.log(dataEl.getAttribute("data"));
+const formEl = getElemById("add-fact");
+const factSaveEl = getElemById("fact-to-save");
+const factResEl = getElemById("fact-res");
 /*----- event listeners -----------------------------------------------------*/
 setEvent("go-btn", "click", makeRequest );
 setEvent("subject", "input",subjectChanged);
 setEvent("subject", "focus",subjectFocused);
 radioEls.forEach(tab=>{setEvent(tab.id,"click", radioClicked);});
+setEvent("save-fact", "click", saveClicked);
 /*----- functions -----------------------------------------------------------------*/ 
+/**-------------------------------
+ *  showNextFact() Will be run 
+ *  * event handler
+ *  * return : none
+ *-------------------------------*/
+function saveClicked()
+{
+  console.log("SAVE -->");
+  factSaveEl.value = factResEl.innerText;
+  //formEl.submit();
+  let final = factResEl.innerText+'/';
+ // final += factResEl.innerText + '/';
+  postData("/add/"+final, final);
+}
 /**-------------------------------
  *  makeRequest() Will be run when Go is clicked
  *  * event handler
  *  * return : send a post request besed on radios and subject
  *-------------------------------*/
-function makeRequest()
+function makeRequest() //BUG STRENG
 {
  let subject = subjectEl.value;
- if(radioSelector == "all")
+ let selected = radioSelector;
+
+ if(selected === "all") // this means type should be randomly selected
  {
-     if ( !subject )
-        radioSelector = ENUMRADIO [ Math.floor(Math.random()*3) +1]
+     if ( isNaN( subject ) || ! subject ) 
+        selected = ENUMRADIO [ Math.floor( Math.random() * 3 ) +1];
      else
-        radioSelector = ENUMRADIO [ Math.floor(Math.random()*2) +1] 
+        selected = ENUMRADIO [ Math.floor(Math.random()*2) +1] ;
  }
- if( ! subject )
-    if (radioSelector != "date")
+ if( ! subject  )
+    if (selected != "date")
         subject = Math.floor( Math.random() * 1000 );
     else
     {
         subject = Math.floor( Math.random() * 11 ) +1;
         subject = subject.toString() + '/' + Math.floor( Math.random() * 30 );   
-    }    
-  subject = radioSelector + ',' + subject ;
-  postData(' ', subject);  
-  console.log( subject);
+    }
+
+  subject = selected + ":" + subject ;
+  postData("/index/", subject);  
+  console.log( subject, "<---Subject to POST");
 }    
 
 /**-------------------------------

@@ -1,16 +1,23 @@
-<h1>Login View</h1>
-
-{% for message in messages %}
-<p>{{ message }}</p>
-{% endfor %}
-
-<form method="POST" action="/loginPage/">
-    {% csrf_token %}
-    <h2>LOGIN</h2>
-    <label for="username">Enter Your Username</label>
-    <input type="text" name="username" id="username"><br>
-    <label for="password">Enter Your Password</label>
-    <input type="password" name="password" id="password"><br>
-    <input type="submit" name="Login">
-</form>
-<a href="/register">Register</a>
+<!-- <h1>Login View</h1> -->
+<link rel="stylesheet" href="../static/css/fn.css" />
+<div id="middle">
+    <p id="logo-first" class="watermark">F</p>
+    <p id="logo-mid" class="watermark ">ACTOLLECTIO</p>
+    <p id="logo-last" class="watermark">N</p>
+    <p id="slogan" class="watermark ">Personal Fun Fact Collection</p>
+  </div>
+    <div class="log-form">
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+        <form method="POST" action="/loginPage/">
+            {% csrf_token %}
+            <h2>LOGIN</h2>
+            <label for="username">Enter Your Username</label>
+            <input type="text" name="username" id="username"><br>
+            <label for="password">Enter Your Password</label>
+            <input type="password" name="password" id="password"><br>
+            <input class="btn" type="submit" name="Login">
+        </form>
+        <a class = "clickable" href="/register">Register</a>
+    </div>

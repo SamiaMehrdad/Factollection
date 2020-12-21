@@ -12,6 +12,9 @@ import json
 @login_required(login_url='loginPage')
 def index(request):
     # get the AuthUser and call the sheet and related facts and links
+
+    if request.method == "POST" :
+        get_facts( request )
     user_id = AuthUser.objects.get(id = request.user.id)
     sheets = UserSheet.objects.all().filter(auth_user = user_id.id) 
     data_list = []
@@ -22,10 +25,9 @@ def index(request):
     for sheet in data_list:
         sheet['fact_length'] = len(sheet['facts'])
     random_fact = Fact_API.trivia_fact_random()
-    #random_fact['text'] = normalize(random_fact['text'], 255)
+    random_fact['text'] = normalize(random_fact['text'], 140)
     return render(request,'index.html', {'data' :data_list, 'user' :request.user, 'random_fact' :random_fact})
 
-# @login_required(login_url='loginPage')
 def home(request):   
     #api call for random trivia fact and date fact for today
     date_fact = Fact_API.date_fact_today()
@@ -76,14 +78,20 @@ def logoutUser(request):
 
 def sheet_detail(request, user_sheet_id):
     sheet = UserSheet.objects.get(id = user_sheet_id)
-    facts = list(UserSheet.get_user_sheet_facts(sheet.id))
+    # facts = list(UserSheet.get_user_sheet_facts(sheet.id))
+    facts = ["fact test one", "test two", "another fact: three"]; #TEST
     links = list(UserSheet.get_user_sheet_links(sheet.id))
     context = {'sheet' :sheet, 'facts': facts, 'links' :links}
     return render(request, 'details.html', context)
 
 
+def get_facts(request):
+    text = request.body.decode("utf-8")
+    print ( type(text), text, "<-----POSTed in get_facts" )
 
-
+def addFact (request):
+    print(request.body,"<----POSTed in affFact")
+    return redirect('/index/')
 ############################### HELPING FUNCTIONS ###############################
 
 ''' 
@@ -98,7 +106,7 @@ def normalize( str, length ):
         return str[0:length-3]+"..."
     # else, str is too short, add non-breakable space to the end    
     else:
-        return str + chr(255) * ( length -len(str) )
+        return str + chr(32) * ( length -len(str) )
 
 
 '''
