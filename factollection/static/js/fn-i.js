@@ -114,7 +114,7 @@ function subjectChanged()
                     subjectEl.value = value.slice(0, -1);
             break;
             case 4:
-                if( isNaN(newChar) || ( parseInt(subjectEl.value[n-1]) > 3 && parseInt(newChar) > 1 )) ///BUG: strange behave for 3x
+                if( isNaN(newChar) || ( parseInt(subjectEl.value[n-1]) > 2 && parseInt(newChar) > 1 ))
                     subjectEl.value = value.slice(0, -1);
             break;        
         }
