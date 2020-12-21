@@ -1,22 +1,7 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 {% load static %}
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FACTOLLECTION a personal fun fact collector</title>
-    <link rel="icon" href="{% static 'img/fn.png' %}">
-    <link rel="stylesheet" href="{% static 'css/fn.css' %}" />
-    <script defer src="{% static 'js/fn-i.js' %}"></script> 
-  </head>
-  <body>
-    <!-- Fixed part. never change start -->
-    <div id="middle">
-      <p id="logo-first" class="watermark">F</p>
-      <p id="logo-mid" class="watermark logged">ACTOLLECTIO</p>
-      <p id="logo-last" class="watermark">N</p>
-      <p id="slogan" class="watermark logged">Personal Fun Fact Collection</p>
-    </div>
+{% block content %}
+<script defer src="{% static 'js/fn-i.js' %}"></script>
     <div id="middle-up">
       <!-- Fixed part. never change end  -->
       <p id="welcome" class="mid-orange">
@@ -33,7 +18,7 @@
         <a href="/details/{{dict.sheet.id}}" >
         <p id="f0" class="fact-list">
           &#9654; {{ dict.sheet.subject }}:: {{ dict.sheet.note }}<span class="icon"> {{ dict.fact_length }}</span>
-        </p>
+        </p> </a>
         {% endfor %}
         <!-- loop through notes or first saved fact of all saved sheets end -->
       </div>
@@ -61,6 +46,5 @@
       </div>
       <p id="right-nav" class="fix big clickable">></p>
     </div>
-    <x id="data-facts" data={{data}}></x>
-</body>
-</html>
+    <x id="data-facts" class="hidden">{{data}}</x> 
+{% endblock content %}
