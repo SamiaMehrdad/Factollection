@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>FACTOLLECTION a personal fun fact collector</title>
+    <link rel="icon" href="{% static 'img/fn.png' %}">
+    <link rel="stylesheet" href="{% static 'css/fn.css' %}">
+    {% block style %}
+    {% endblock style %}
+</head>
+
+<body>
+    <div id="middle">
+        <p id="logo-first" class="watermark">F</p>
+        <p id="logo-mid" class="watermark logged">ACTOLLECTIO</p>
+        <p id="logo-last" class="watermark">N</p>
+        <p id="slogan" class="watermark logged">Personal Fun Fact Collection</p>
+    </div>
+    {% block content %}
+    {% endblock content %}
+    <!-- Hidden data containers -->
+    <x class ="hidden" id="data-facts"> {{facts}} </x>
+    <x class ="hidden" id="data-categories"> {{categories}} </x>
+    <x class ="hidden" id="data-links"> {{links}} </x>
+    {% block javascript %}
+    {% endblock javascript %}
+</body>
+
+</html>

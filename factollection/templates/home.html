@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FACTOLLECTION a personal fun fact collector</title>
-    <link rel="icon" href="../static/img/fn.png">
-    <link rel="stylesheet" href="../static/css/fn.css">
-    <script defer src="../static/js/fn.js"></script>
-</head>
-<body>
-<!-- Fixed part. never change start -->
+{% extends "base.html" %}
+
+{% block content %}
     <div id="middle">
         <p id="logo-first" class="watermark">F</p>
         <p id="logo-mid" class="watermark">ACTOLLECTIO</p>
@@ -36,5 +27,4 @@
         </div>
         <!-- <p id="shuffle" class="clickable"> Shuffle </p> -->
     </div>
-</body>
-</html>
+{% endblock content %}

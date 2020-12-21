@@ -1,24 +1,8 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FACTOLLECTION a personal fun fact collector</title>
-    <link rel="icon" href="{% static 'img/fn.png' %}">
-    <link rel="stylesheet" href="{% static 'css/fn.css' %}">
-    <script defer src="{% static 'js/fn-d.js' %}"></script>
-</head>
-<body>
-<!-- Fixed part. never change start -->
-    <div id="middle">
-        <p id="logo-first" class="watermark">F</p>
-        <p id="logo-mid" class="watermark logged">ACTOLLECTIO</p>
-        <p id="logo-last" class="watermark">N</p>
-        <p id="slogan" class="watermark logged">Personal Fun Fact Collection</p>
-    </div>
+
+    {% extends "base.html" %}
+
+    {% block content %}
     <div id="middle-up">
-<!-- Fixed part. never change end  -->
         <div id="top-bar">
             <p id="det-del-fact" class="icon clickable">&#x1f5d1;</p>
             <p id="det-subject"> {{ sheet.subject }}</p>
@@ -66,9 +50,4 @@
             <p id="remove-yes" class="clickable dark" id="back"> YES, REMOVE IT! </p>
         </div>
     </div>
-    <!-- Hidden data containers -->
-    <x class ="hidden" id="data-facts"> {{facts}} </x>
-    <x class ="hidden" id="data-categories"> {{categories}} </x>
-    <x class ="hidden" id="data-links"> {{links}} </x>
-</body>
-</html>
+    {% endblock content %}

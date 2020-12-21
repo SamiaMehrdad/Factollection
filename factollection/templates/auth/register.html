@@ -1,13 +1,7 @@
-<!-- <h1>Register Form</h1> -->
-<link rel="stylesheet" href="../static/css/fn.css" />
-<div id="middle">
-    <p id="logo-first" class="watermark">F</p>
-    <p id="logo-mid" class="watermark ">ACTOLLECTIO</p>
-    <p id="logo-last" class="watermark">N</p>
-    <p id="slogan" class="watermark ">Personal Fun Fact Collection</p>
-  </div>
-  <div id="middle-up">
 
+{% extends "base.html" %}
+
+{% block content %}
 {{ form.errors}}
 <div class="log-form">
   <form method="POST" action="/register/">
@@ -22,3 +16,4 @@
   </form>
   <a href="/loginPage/">Login Page</a>
 </div>
+{% endblock content %}
