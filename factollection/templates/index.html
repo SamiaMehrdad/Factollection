@@ -30,7 +30,7 @@
         {% for dict in data %}
         <!-- <a href='/details/{{ dict.sheet.id }}' -->
             <!-- using Django way !-->
-        <a href="{ % url 'details' dict.sheet.id %}" >
+        <a href="/details/{{dict.sheet.id}}" >
         <p id="f0" class="fact-list">
           &#9654; {{ dict.sheet.subject }}:: {{ dict.sheet.note }}<span class="icon"> {{ dict.fact_length }}</span>
         </p>
