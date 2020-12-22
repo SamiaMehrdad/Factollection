@@ -95,9 +95,15 @@ def get_facts(request):
     text = request.body.decode("utf-8").split(':')
     fact_type = text[0].replace(extra_char, '')
     fact_subject = text[1].replace(extra_char, '')
-    temp = Fact_API.trivia_fact(fact_subject)
-    fact = {'text' :temp["text"],
-            'number' :temp["number"]
+    if fact_type == 'trivia':
+        fact = Fact_API.trivia_fact(fact_subject)
+    elif fact_type == 'math':
+        fact = Fact_API.math_fact(fact_subject)
+    else:
+        fact = Fact_API.year_fact(fact_subject)
+    print(fact['type'])
+    fact = {'text' :fact["text"],
+            'number' :fact["number"]
     }
     return JsonResponse(fact)
 
