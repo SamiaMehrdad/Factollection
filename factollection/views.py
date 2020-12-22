@@ -22,7 +22,7 @@ def index(request):
     for sheet in sheets:
         facts = list(UserSheet.get_user_sheet_facts(sheet.id))
         sheet_list = {'sheet' :sheet, 'facts' :facts}
-        data_list.append(sheet_list)
+        data_list.append(sheet_list) 
     for sheet in data_list:
         sheet['fact_length'] = len(sheet['facts'])
     random_fact = Fact_API.trivia_fact_random()
