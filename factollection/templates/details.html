@@ -3,6 +3,7 @@
     {% load static %}
     {% block content %}
     <script defer src="{% static 'js/fn-d.js' %}"></script>
+    <script defer src="{% static 'js/details.js' %}"></script>
     <div id="middle-up">
         <div id="top-bar">
             <p id="det-del-fact" class="icon clickable">&#x1f5d1;</p>
@@ -23,7 +24,7 @@
                 <!-- </div> -->
             </div>
             <div id="top-label-note" class="orange-bar left">Notes
-               <textarea id="fact-note" name="notes">{{ sheet.note }}</textarea>
+               <input type='text' id="fact-note" name="notes" value = "{{ sheet.note }}" >
             </div>
             <div id="top-label-links" class="orange-bar left">Links
             <input id="add-link" type="submit" class="clickable link" value="+">    
@@ -43,7 +44,7 @@
     </div>
     <div id="bottom-band">
         <div id="index-bottom-container">
-          <a href="/updatenote/{{ sheet.id }}/new note here" class="btn" id="save"> SAVE </a>
+          <a href="/updatenote/{{ sheet.id }}/" class="btn" id="save"> SAVE </a>
           <a href="/index" class="clickable dark" id="back"> BACK </a>
           <a id="remove" class="clickable dark"> REMOVE THIS SHEET </a>
         </div>
