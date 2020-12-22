@@ -1,1 +1,1 @@
-web: gunicorn factollection.wsgi
+web: gunicorn fact_app/wsgi.py
