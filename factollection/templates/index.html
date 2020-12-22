@@ -32,19 +32,19 @@
       <input id="go-btn" class="clickable link" value="Go" type="submit" />
     </div>
     <div id="bottom-band">
-      <p id="left-nav" class="fix big clickable"><</p>
+      <a href="/index/" id="left-nav" class="fix big clickable"><</a>
       <div id="bottom-container">
         <p id="about-random">About {{ random_fact.number }}:</p>
         <!-- it may needs to be a form and submit input here -->
         <form id="add-fact" action="/add/" method="POST">{% csrf_token %}
         <input id="fact-to-save" class="hidden"> 
         </form>
-        <a  class="clickable" id="save-fact"> Save </a>
+        <a  href="/addfact/{{ random_fact.text }}/{{ random_fact.number }}/{{ random_fact.type }}" class="clickable" id="save-fact"> Save </a>
         <p id="fact-res">
            {{ random_fact.text }}
         </p>
       </div>
-      <p id="right-nav" class="fix big clickable">></p>
+      <a href="/index/" id="right-nav" class="fix big clickable">></a>
     </div>
     <x id="data-facts" class="hidden">{{data}}</x> 
 {% endblock content %}

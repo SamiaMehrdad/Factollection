@@ -27,7 +27,7 @@
     </div>
     <div id="middle-up">
         <div id="top-bar">
-            <p id="det-del-fact" class="icon clickable">&#x1f5d1;</p>
+            <a href="/deletefact/{{ facts.0.id }}" id="det-del-fact" class="icon clickable">&#x1f5d1;</a>
             <p id="det-subject"> {{ sheet.subject }}</p>
             <div id="top-label-det" class="orange-bar left">Details
                 <p id="category" class="clickable">No Category &#9660;</p>
@@ -36,14 +36,16 @@
                 <!-- <div id="fact" class="det-fact">  -->
                     <span id="det-prev" class="icon clickable big nav"> < </span>
                     <span id="fact" class="det-fact">
-                    {Also this is another info panel containing saved fun facts
-                    and for this one also it can cover up to three lines.}
+                    {% for fact in facts %}
+                    {{ fact.text }}
+                    {% endfor %}
                     </span>
+                    
                     <span id="det-next" class="icon clickable big nav"> > </span>
                 <!-- </div> -->
             </div>
             <div id="top-label-note" class="orange-bar left">Notes
-               <textarea id="fact-note" name="notes">{{ sheet.note }}</textarea>
+               <input type='text' id="fact-note" name="notes" value = "{{ sheet.note }}" >
             </div>
             <div id="top-label-links" class="orange-bar left">Links
             <input id="add-link" type="submit" class="clickable link" value="+">    
@@ -63,14 +65,14 @@
     </div>
     <div id="bottom-band">
         <div id="index-bottom-container">
-          <a id="save" class="btn" > SAVE </a>
+          <a href="/updatenote/{{ sheet.id }}/" class="btn" id="save"> SAVE </a>
           <a href="/index" class="clickable dark" id="back"> BACK </a>
-          <p id="remove" class="clickable dark"> REMOVE THIS SHEET </p>
+          <a id="remove" class="clickable dark"> REMOVE THIS SHEET </a>
         </div>
         <div id="bottom-attention" class="hidden">
             <p class="dark"> ARE YOU REALLY WANT TO REMOVE THIS SHEET? </p>
-            <P id="remove-no" class="clickable dark" > NO, CANCEL </P>
-            <p id="remove-yes" class="clickable dark" id="back"> YES, REMOVE IT! </p>
+            <p id="remove-no" class="clickable dark" > NO, CANCEL </p>
+            <a href="/deletesheet/{{sheet.id}}" id="remove-yes" class="clickable dark" id="back"> YES, REMOVE IT! </a>
         </div>
     </div>
     <x id="data-facts" class="hidden">{{data}}</x>
