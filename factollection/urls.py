@@ -14,4 +14,7 @@ urlpatterns = [
     path('updatenote/<int:user_sheet_id>/<str:note_text>/', views.save_note, name='save_note'),
     path('deletesheet/<int:user_sheet_id>', views.delete_sheet, name='delete_sheet'),
     path('deletefact/<int:fact_id>', views.delete_fact, name='delete_fact'),
+    path('deletelink/<int:link_id>', views.delete_link, name='delete_link'),
+    path('addlink/<int:sheet_id>/<str:link_text>/<str:link_url>', views.add_link, name='add_link'),
+    path('updatelink/<int:link_id>/<str:link_text>/<str:link_url>', views.update_link, name="update_link"),
 ]
