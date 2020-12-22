@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Max
 from .forms import CreateUserForm
-from .models import AuthUser, UserSheet, Fact_API, Fact
+from .models import AuthUser, Link, UserSheet, Fact_API, Fact
 from datetime import date
 import json
 
@@ -107,7 +107,7 @@ def get_facts(request):
     }
     return JsonResponse(fact)
 
-
+@login_required(login_url='home')
 def add_fact (request, fact_text, sub, fact_type):
     user = AuthUser.objects.get(id = request.user.id)
     # check to see if other sheets have the same "subject"
@@ -119,10 +119,25 @@ def add_fact (request, fact_text, sub, fact_type):
         new_fact = Fact.objects.create(user_sheet=sheet, text=fact_text, number=sub, found=True, fact_type=fact_type)
     return redirect('/index/')
 
+@login_required(login_url='home')
+def add_link (request, sheet_id, link_text, link_url):
+    sheet = UserSheet.objects.get(auth_user = request.user.id, id = sheet_id)
+    new_link = Link.objects.create(user_sheet = sheet, title = link_text, url = link_url)
+    return redirect(f'/details/{sheet.id}')
+
+@login_required(login_url='home')
+def update_link (request, link_id, link_text, link_url):
+    link = Link.objects.filter(id = link_id,)
+    user_sheet_id = link[0].user_sheet.id
+    link.update(title = link_text, url = link_url)
+    return redirect(f'/details/{user_sheet_id}')
+
+@login_required(login_url='home')
 def save_note(request, user_sheet_id, note_text):
     sheet = UserSheet.objects.filter(id = user_sheet_id).update(note=note_text)
     return redirect(f'/details/{user_sheet_id}')
 
+@login_required(login_url='home')
 def delete_sheet(request, user_sheet_id):
     user = AuthUser.objects.get(id = request.user.id)
     sheet = UserSheet.objects.get(auth_user=user, id=user_sheet_id)
@@ -135,8 +150,13 @@ def delete_fact(request, fact_id):
     user_sheet_id = fact.user_sheet.id
     fact.delete()
     return redirect(f'/details/{user_sheet_id}')
-    
 
+@login_required(login_url='home')
+def delete_link(request, link_id):
+    link = Link.objects.get(id = link_id)
+    user_sheet_id = link.user_sheet.id
+    link.delete()
+    return redirect(f'/details/{user_sheet_id}')
 ############################### HELPING FUNCTIONS ###############################
 
 ''' 
