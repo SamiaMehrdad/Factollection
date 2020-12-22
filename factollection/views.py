@@ -10,7 +10,7 @@ from datetime import date
 import json
 
 
-@login_required(login_url='loginPage')
+@login_required(login_url='home')
 def index(request):
     # get the AuthUser and call the sheet and related facts and links
 
@@ -29,18 +29,20 @@ def index(request):
     random_fact['text'] = normalize(random_fact['text'], 140)
     return render(request,'index.html', {'data' :data_list, 'user' :request.user, 'random_fact' :random_fact})
 
-def home(request):   
-    #api call for random trivia fact and date fact for today
-    date_fact = Fact_API.date_fact_today()
-    trivia_fact = Fact_API.trivia_fact_random() 
-    print(date_fact)
-    context = {'date_fact' :date_fact, 
-                'trivia_fact' :trivia_fact,}
-    return render(request, 'home.html', context)
+def home(request):
+    if request.user.is_authenticated:
+        return redirect('index')
+    else:
+        #api call for random trivia fact and date fact for today
+        date_fact = Fact_API.date_fact_today()
+        trivia_fact = Fact_API.trivia_fact_random() 
+        context = {'date_fact' :date_fact, 
+                    'trivia_fact' :trivia_fact,}
+        return render(request, 'home.html', context)
 
 def register(request):
     if request.user.is_authenticated:
-        return redirect('home')
+        return redirect('index')
     else:
         form = CreateUserForm
         if request.method == "POST":
@@ -73,10 +75,10 @@ def loginPage(request):
 
 def logoutUser(request):
     logout(request)
-    return redirect('/loginPage/')
+    return redirect('/home')
 
 
-
+@login_required(login_url='home')
 def sheet_detail(request, user_sheet_id):
     sheet = UserSheet.objects.get(id = user_sheet_id)
     facts = list(UserSheet.get_user_sheet_facts(sheet.id))
