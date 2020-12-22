@@ -66,7 +66,6 @@ class AuthUser(models.Model):
         db_table = 'auth_user'
 
 class Fact(models.Model):
-    id = models.IntegerField(primary_key=True)
     user_sheet = models.ForeignKey('UserSheet', models.DO_NOTHING)
     text = models.CharField(max_length=250)
     year = models.IntegerField(blank=True, null=True)
@@ -91,7 +90,6 @@ class Link(models.Model):
 
 
 class UserSheet(models.Model):
-    id = models.IntegerField(primary_key=True)
     auth_user = models.ForeignKey(AuthUser, models.DO_NOTHING)
     subject = models.CharField(max_length=250, blank=True, null=True)
     note = models.CharField(max_length=250, blank=True, null=True)

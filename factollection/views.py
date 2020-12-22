@@ -3,8 +3,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.db.models import Max
 from .forms import CreateUserForm
-from .models import AuthUser, UserSheet, Fact_API
+from .models import AuthUser, UserSheet, Fact_API, Fact
 from datetime import date
 import json
 
@@ -89,8 +90,11 @@ def get_facts(request):
     text = request.body.decode("utf-8")
     print ( type(text), text, "<-----POSTed in get_facts" )
 
-def addFact (request):
-    print(request.body,"<----POSTed in affFact")
+def add_fact (request, fact_text, sub, type):
+    user_id = AuthUser.objects.get(id = request.user.id)
+    sheet = UserSheet.objects.create(auth_user=user_id, subject=sub)
+    new_fact = Fact.objects.create(user_sheet=sheet, text=fact_text, number=sub, found=True, fact_type=type)
+
     return redirect('/index/')
 ############################### HELPING FUNCTIONS ###############################
 

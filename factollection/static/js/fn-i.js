@@ -158,6 +158,7 @@ function radioClicked(e)
  *-------------------------------*/
 function postData( url, data )
 {
+    console.log(data);
     fetch(url , {
         credentials: 'include',
         method: 'POST',
