@@ -90,10 +90,15 @@ def get_facts(request):
     text = request.body.decode("utf-8")
     print ( type(text), text, "<-----POSTed in get_facts" )
 
-def add_fact (request, fact_text, sub, type):
-    user_id = AuthUser.objects.get(id = request.user.id)
-    sheet = UserSheet.objects.create(auth_user=user_id, subject=sub)
-    new_fact = Fact.objects.create(user_sheet=sheet, text=fact_text, number=sub, found=True, fact_type=type)
+def add_fact (request, fact_text, sub, fact_type):
+    user = AuthUser.objects.get(id = request.user.id)
+    # check to see if other sheets have the same "subject"
+    try: # if there is a matching sheet then add fact to that sheet 
+        matching_sheet_subject = UserSheet.objects.get(auth_user = user, subject = sub)
+        new_fact = Fact.objects.create(user_sheet=matching_sheet_subject, text=fact_text, number=sub, found=True, fact_type=fact_type)
+    except UserSheet.DoesNotExist: # if there isnt a matching sheet then create a new sheet and add the fact to that
+        sheet = UserSheet.objects.create(auth_user=user, subject=sub)
+        new_fact = Fact.objects.create(user_sheet=sheet, text=fact_text, number=sub, found=True, fact_type=fact_type)
 
     return redirect('/index/')
 ############################### HELPING FUNCTIONS ###############################
