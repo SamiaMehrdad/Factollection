@@ -1,1 +1,1 @@
-web: gunicorn fact_app/wsgi.py:application
+web: gunicorn fact_app.wsgi:application
