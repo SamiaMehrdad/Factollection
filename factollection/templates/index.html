@@ -39,7 +39,7 @@
         <form id="add-fact" action="/add/" method="POST">{% csrf_token %}
         <input id="fact-to-save" class="hidden"> 
         </form>
-        <a  class="clickable" id="save-fact"> Save </a>
+        <a  href="/addfact/{{ random_fact.text }}/{{ random_fact.number }}/{{ random_fact.type }}" class="clickable" id="save-fact"> Save </a>
         <p id="fact-res">
            {{ random_fact.text }}
         </p>
