@@ -99,8 +99,19 @@ def add_fact (request, fact_text, sub, fact_type):
     except UserSheet.DoesNotExist: # if there isnt a matching sheet then create a new sheet and add the fact to that
         sheet = UserSheet.objects.create(auth_user=user, subject=sub)
         new_fact = Fact.objects.create(user_sheet=sheet, text=fact_text, number=sub, found=True, fact_type=fact_type)
-
     return redirect('/index/')
+
+def save_note(request, user_sheet_id, note_text):
+    sheet = UserSheet.objects.filter(id = user_sheet_id).update(note=note_text)
+    return redirect(f'/details/{user_sheet_id}')
+
+def delete_sheet(request, user_sheet_id):
+    user = AuthUser.objects.get(id = request.user.id)
+    sheet = UserSheet.objects.get(auth_user=user, id=user_sheet_id)
+    sheet.delete()
+    return redirect('/index/')
+
+
 ############################### HELPING FUNCTIONS ###############################
 
 ''' 
