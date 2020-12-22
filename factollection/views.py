@@ -1,4 +1,6 @@
+from django import http
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -9,13 +11,11 @@ from .models import AuthUser, UserSheet, Fact_API, Fact
 from datetime import date
 import json
 
-
 @login_required(login_url='home')
 def index(request):
     # get the AuthUser and call the sheet and related facts and links
-
     if request.method == "POST" :
-        get_facts( request )
+        return get_facts( request )
     user_id = AuthUser.objects.get(id = request.user.id)
     sheets = UserSheet.objects.all().filter(auth_user = user_id.id) 
     data_list = []
@@ -89,8 +89,18 @@ def sheet_detail(request, user_sheet_id):
 
 
 def get_facts(request):
-    text = request.body.decode("utf-8")
-    print ( type(text), text, "<-----POSTed in get_facts" )
+    # remove quotes and seperate the requests
+    extra_char = '"'
+    print(request.body)
+    text = request.body.decode("utf-8").split(':')
+    fact_type = text[0].replace(extra_char, '')
+    fact_subject = text[1].replace(extra_char, '')
+    temp = Fact_API.trivia_fact(fact_subject)
+    fact = {'text' :temp["text"],
+            'number' :temp["number"]
+    }
+    return JsonResponse(fact)
+
 
 def add_fact (request, fact_text, sub, fact_type):
     user = AuthUser.objects.get(id = request.user.id)

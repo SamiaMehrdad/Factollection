@@ -20,6 +20,8 @@ const dataEl = getElemById("data-facts");
 const formEl = getElemById("add-fact");
 const factSaveEl = getElemById("fact-to-save");
 const factResEl = getElemById("fact-res");
+const factResNumEl = getElemById("about-random");
+const factSaveLinkEl = getElemById("save-fact")
 /*----- event listeners -----------------------------------------------------*/
 setEvent("go-btn", "click", makeRequest );
 setEvent("subject", "input",subjectChanged);
@@ -169,8 +171,14 @@ function postData( url, data )
             'Content-Type': 'application/json',
             'X-CSRFToken': getCookie('csrftoken')
           },
-        body: JSON.stringify(data)
-    }).then(res => res.json()).then((d) => console.log(d));
+        body: data
+    }).then(response => response.json())
+    .then(function (res) {
+    factResEl.innerHTML = res.text;
+    factResNumEl.innerHTML = 'About ' + res.number + ':';
+    hrefLink = '/addfact/' + res.text + '/' + res.number + '/' + res.type
+    factSaveLinkEl.setAttribute('href', hrefLink)
+    });
 }
 
 /**-------------------------------
