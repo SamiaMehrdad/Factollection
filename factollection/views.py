@@ -123,6 +123,13 @@ def delete_sheet(request, user_sheet_id):
     sheet.delete()
     return redirect('/index/')
 
+@login_required(login_url='home')
+def delete_fact(request, fact_id):
+    fact = Fact.objects.get(id = fact_id)
+    user_sheet_id = fact.user_sheet.id
+    fact.delete()
+    return redirect(f'/details/{user_sheet_id}')
+    
 
 ############################### HELPING FUNCTIONS ###############################
 

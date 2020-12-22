@@ -6,7 +6,7 @@
     <script defer src="{% static 'js/details.js' %}"></script>
     <div id="middle-up">
         <div id="top-bar">
-            <p id="det-del-fact" class="icon clickable">&#x1f5d1;</p>
+            <a href="/deletefact/{{ facts.0.id }}" id="det-del-fact" class="icon clickable">&#x1f5d1;</a>
             <p id="det-subject"> {{ sheet.subject }}</p>
             <div id="top-label-det" class="orange-bar left">Details
                 <p id="category" class="clickable">No Category &#9660;</p>
