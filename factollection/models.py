@@ -79,7 +79,6 @@ class Fact(models.Model):
 
 
 class Link(models.Model):
-    id = models.IntegerField(primary_key=True)
     user_sheet = models.ForeignKey('UserSheet', models.DO_NOTHING)
     title = models.CharField(max_length=250)
     url = models.CharField(max_length=250)
