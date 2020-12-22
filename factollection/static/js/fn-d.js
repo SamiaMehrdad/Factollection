@@ -25,6 +25,7 @@ setEvent("det-next", "click", showNextFact);
 setEvent("det-prev", "click", showPrevFact);
 setEvent("remove","click", removeClicked);
 setEvent("remove-no","click", removeCancel);
+setEvent("remove-yes","click", removeProceed);
 /*------- initializing ------------------------------------------------------*/
 initLists();
 /*----- functions -----------------------------------------------------------*/ 
@@ -98,6 +99,58 @@ function removeCancel()
   bottomAttentionEl.classList.add("hidden");
   bottomBandEl.classList.remove("attention");
   bottomContainerEl.classList.remove("hidden");
+}
+
+/**-------------------------------
+ *  removeProceed() Will be run remove is confirmed
+ *  * event handler
+ *  * return : none
+ *-------------------------------*/
+function removeProceed()
+{
+  console.log("REMOVE CONFIRMED");
+  let sheetId = getElemById("sheet-id").innerText;
+  postData("/delete/",sheetId);
+}
+/**-------------------------------
+ *  postData( url, data ) send a post data
+ *  Show useful console log 
+ *  *return: None
+ *-------------------------------*/
+function postData( url, data )
+{
+    fetch(url , {
+        credentials: 'include',
+        method: 'POST',
+        mode: 'same-origin',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+          },
+        body: JSON.stringify(data)
+    }).then(res => res.json()).then((d) => console.log(d));
+}
+
+/**-------------------------------
+ *   getCookie(name) will get cookie value of given name
+ *  
+ *  *return: cookie value of related cookie name
+ *-------------------------------*/
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            //var cookie = jQuery.trim(cookies[i]);
+            var cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }
 /**-------------------------------
  *  getElemById(id) Make life a little easier.

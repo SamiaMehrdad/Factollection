@@ -36,10 +36,11 @@ function saveClicked()
 {
   console.log("SAVE -->");
   factSaveEl.value = factResEl.innerText;
+  let subject = subjectEl.innerText.replace("/","_");
   //formEl.submit();
-  let final = factResEl.innerText+'/';
+  let final = factResEl.innerText+'/'+subjectEl+"/"+radioSelector;
  // final += factResEl.innerText + '/';
-  postData("/add/"+final, final);
+  postData("/addfact/", final);
 }
 /**-------------------------------
  *  makeRequest() Will be run when Go is clicked

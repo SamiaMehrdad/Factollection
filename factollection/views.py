@@ -79,10 +79,10 @@ def logoutUser(request):
 
 def sheet_detail(request, user_sheet_id):
     sheet = UserSheet.objects.get(id = user_sheet_id)
-    # facts = list(UserSheet.get_user_sheet_facts(sheet.id))
-    facts = ["fact test one", "test two", "another fact: three"]; #TEST
+    facts = list(UserSheet.get_user_sheet_facts(sheet.id))
+    #facts = ["fact test one", "test two", "another fact: three"]; #TEST
     links = list(UserSheet.get_user_sheet_links(sheet.id))
-    context = {'sheet' :sheet, 'facts': facts, 'links' :links}
+    context = {'sheet' :sheet, 'facts': facts, 'links' :links, 'id':user_sheet_id}
     return render(request, 'details.html', context)
 
 
