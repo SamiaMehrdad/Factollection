@@ -3,6 +3,24 @@
     {% load static %}
     {% block content %}
     <script defer src="{% static 'js/fn-d.js' %}"></script>
+    <div id="shade" class="overlay hidden"></div>
+    <div id="edit-link" class="modal hidden" >
+        <form action="" method="POST">
+            <h2>Link Properties</h2>  
+            <label> Link Description <input id="link-title"></label><br>
+            <label> Link Address url <input id="link-url"></label><br>    
+            <input type="submit" value="OK" class="btn">
+            <a id="link-edit-cancel"class="clickable">Cancel</a>   
+        </form>
+    </div>
+    <div id="delete-link" class="modal hidden" >
+        <form action="" method="POST">
+            <h2>Remove Link </h2><br>    
+            <p>Are you sure you want to remove this link from your collection sheet?</p>  
+            <input type="submit" value="Yes, Remove" class="btn">
+            <a id="link-remove-cancel" class="clickable">Cancel</a>   
+        </form>
+    </div>
     <div id="middle-up">
         <div id="top-bar">
             <p id="det-del-fact" class="icon clickable">&#x1f5d1;</p>
@@ -30,8 +48,8 @@
                     {% for link in links %}
                     <a href={{ link.url }} target='_blank' id='{{ link.id }}'> {{ link.title }}</a>
                         <!-- There is non-breakable spaces here. Dont change these two lines -->
-                    <span class="clickable">    &#x1f589;</span> 
-                    <span class="clickable">    &#x1f5d1;</span>
+                    <span class="clickable" id='e{{ link.id }}'>    &#x1f589;</span> 
+                    <span class="clickable" id='d{{ link.id }}'>    &#x1f5d1;</span>
                     <br>
                     {% endfor %}
                     <!-- Loop for saved links ends here -->
@@ -41,9 +59,9 @@
     </div>
     <div id="bottom-band">
         <div id="index-bottom-container">
-          <a href="/index" class="btn" id="save"> SAVE </a>
+          <a id="save" class="btn" > SAVE </a>
           <a href="/index" class="clickable dark" id="back"> BACK </a>
-          <p  id="remove" class="clickable dark"> REMOVE THIS SHEET </p>
+          <p id="remove" class="clickable dark"> REMOVE THIS SHEET </p>
         </div>
         <div id="bottom-attention" class="hidden">
             <p class="dark"> ARE YOU REALLY WANT TO REMOVE THIS SHEET? </p>

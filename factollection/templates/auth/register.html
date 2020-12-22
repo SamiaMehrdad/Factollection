@@ -3,7 +3,7 @@
 
 {% block content %}
 {{ form.errors}}
-<div class="log-form">
+<div id="register" class="modal">
   <form method="POST" action="/register/">
     {% csrf_token %} 
     <h2>New User</h2>
@@ -13,7 +13,7 @@
     {{ form.password1.label }} {{ form.password1 }}<br />
     {{ form.password2.label }} {{ form.password2 }}<br />
     <input class="btn" type="submit" name="Create User" />
+    <a href="/loginPage/">Login Page</a>
   </form>
-  <a href="/loginPage/">Login Page</a>
 </div>
 {% endblock content %}

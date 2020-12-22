@@ -13,6 +13,17 @@
 /*----- app's state (variables) -------------------------------------*/
 let factIndex = 0;
 let factsArray = [];
+let sheetModel = {
+  subject: "",
+  note: "",
+  links: [],
+
+
+}
+let linkModel = {
+  title: "",
+  url: "",
+}
 /*----- cached element references -----------------------------------*/
 const bottomBandEl = getElemById("bottom-band");
 const bottomAttentionEl = getElemById("bottom-attention");
@@ -20,12 +31,23 @@ const bottomContainerEl = getElemById("index-bottom-container");
 const factEl = getElemById("fact");
 const nextEl = getElemById("det-next");
 const prevEl = getElemById("det-prev");
+const shadeEl = getElemById("shade");
+const modalDelEl = getElemById("delete-link");
+const modalEditEl = getElemById("edit-link");
+const allLinksEl = getElemById("links-area").children;
+// console.log(typeof(allLinksEl));
 /*----- event listeners -----------------------------------------------------*/
 setEvent("det-next", "click", showNextFact);
 setEvent("det-prev", "click", showPrevFact);
 setEvent("remove","click", removeClicked);
 setEvent("remove-no","click", removeCancel);
 setEvent("remove-yes","click", removeProceed);
+setEvent("save","click",saveSheet);
+setEvent("link-edit-cancel","click",closeModal);
+setEvent("link-remove-cancel","click",closeModal);
+for( element of allLinksEl) { 
+  setEvent(element.id,"click",linkAreaClick)
+};
 /*------- initializing ------------------------------------------------------*/
 initLists();
 /*----- functions -----------------------------------------------------------*/ 
@@ -34,10 +56,30 @@ function initLists()
   let facts =getElemById("data-facts").innerText;
   facts = facts.replaceAll("'",'');
   factsArray = facts.substring(2, facts.length-2).split(",");
- console.log(factsArray, factsArray.length);
+  console.log(factsArray, factsArray.length);
 }
 
+function linkAreaClick(e)
+{
+  
+  let item = e.target.id;
+  console.log(e.target.id[0], " CLICKED");
 
+  if( item[0] === 'd' )
+    showModal(modalDelEl, item);
+  if( item[0] === 'e' ) 
+    showModal(modalEditEl, item);
+
+}
+/**-------------------------------
+ *  saveSheet() Will be run 
+ *  * event handler
+ *  * return : none
+ *-------------------------------*/
+function saveSheet()
+{
+  console.log("SAVE")
+}
 /**-------------------------------
  *  showNextFact() Will be run 
  *  * event handler
@@ -151,6 +193,23 @@ function getCookie(name) {
         }
     }
     return cookieValue;
+}
+
+function showModal( elem, item )
+{
+  shadeEl.classList.remove("hidden");
+  elem.classList.remove("hidden");
+}
+/**-------------------------------
+ *  closeModal(id) close all modals and overlay.
+ *  
+ *  *return: None
+ *-------------------------------*/
+function closeModal()
+{
+  shadeEl.classList.add("hidden");
+  modalDelEl.classList.add("hidden");
+  modalEditEl.classList.add("hidden");
 }
 /**-------------------------------
  *  getElemById(id) Make life a little easier.

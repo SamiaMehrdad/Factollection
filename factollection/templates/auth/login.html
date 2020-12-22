@@ -2,19 +2,20 @@
     {% extends "base.html" %}
 
     {% block content %}
-    <div class="log-form">
+    <div class="modal">
         {% for message in messages %}
         <p>{{ message }}</p>
         {% endfor %}
         <form method="POST" action="/loginPage/">
             {% csrf_token %}
-            <h2>LOGIN</h2>
+            <h3>LOGIN</h3>
             <label for="username">Enter Your Username</label>
             <input type="text" name="username" id="username"><br>
             <label for="password">Enter Your Password</label>
             <input type="password" name="password" id="password"><br>
             <input class="btn" type="submit" name="Login">
+            <a class = "clickable" href="/register">Register</a>
         </form>
-        <a class = "clickable" href="/register">Register</a>
+
     </div>
     {% endblock content %}
