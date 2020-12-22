@@ -32,7 +32,7 @@
       <input id="go-btn" class="clickable link" value="Go" type="submit" />
     </div>
     <div id="bottom-band">
-      <p id="left-nav" class="fix big clickable"><</p>
+      <a href="/index/" id="left-nav" class="fix big clickable"><</a>
       <div id="bottom-container">
         <p id="about-random">About {{ random_fact.number }}:</p>
         <!-- it may needs to be a form and submit input here -->
@@ -44,7 +44,7 @@
            {{ random_fact.text }}
         </p>
       </div>
-      <p id="right-nav" class="fix big clickable">></p>
+      <a href="/index/" id="right-nav" class="fix big clickable">></a>
     </div>
     <x id="data-facts" class="hidden">{{data}}</x> 
 {% endblock content %}
