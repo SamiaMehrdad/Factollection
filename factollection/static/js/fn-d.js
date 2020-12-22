@@ -45,6 +45,7 @@ setEvent("remove-yes","click", removeProceed);
 setEvent("save","click",saveSheet);
 setEvent("link-edit-cancel","click",closeModal);
 setEvent("link-remove-cancel","click",closeModal);
+setEvent("add-link","click",addLink)
 for( element of allLinksEl) { 
   setEvent(element.id,"click",linkAreaClick)
 };
@@ -59,17 +60,40 @@ function initLists()
   console.log(factsArray, factsArray.length);
 }
 
+/**-------------------------------
+ *  addLink() Will be run + button press
+ *  This function will show modal panel
+ *  * event handler
+ *  * return : none
+ *-------------------------------*/
+function addLink()
+{
+  getElemById("link-id").value = "10000"; //indicates new link
+  showModal(modalEditEl);
+}
+/**-------------------------------
+ *  linkAreaClick() Will be run if edit or remove icon of a link is clicked
+ *  This function will show related modal panel
+ *  * event handler
+ *  * return : none
+ *-------------------------------*/
 function linkAreaClick(e)
 {
-  
   let item = e.target.id;
-  console.log(e.target.id[0], " CLICKED");
+ // console.log(e.target.id[0], " CLICKED");
 
   if( item[0] === 'd' )
-    showModal(modalDelEl, item);
-  if( item[0] === 'e' ) 
-    showModal(modalEditEl, item);
-
+    showModal(modalDelEl);
+  if( item[0] === 'e' )
+  { 
+    let id = item.substring(1);
+    console.log("ID == ", id);
+    let target = getElemById(id);
+    getElemById("link-title").value = target.innerText;
+    getElemById("link-url").value = target.getAttribute("href");
+    getElemById("link-id").value = id;
+    showModal(modalEditEl);
+  }
 }
 /**-------------------------------
  *  saveSheet() Will be run 
@@ -195,7 +219,7 @@ function getCookie(name) {
     return cookieValue;
 }
 
-function showModal( elem, item )
+function showModal( elem )
 {
   shadeEl.classList.remove("hidden");
   elem.classList.remove("hidden");
