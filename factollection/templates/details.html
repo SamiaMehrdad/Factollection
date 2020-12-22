@@ -36,9 +36,9 @@
                 <!-- <div id="fact" class="det-fact">  -->
                     <span id="det-prev" class="icon clickable big nav"> < </span>
                     <span id="fact" class="det-fact">
-                    {% for fact in facts %}
-                    {{ fact.text }}
-                    {% endfor %}
+
+                    {{ facts.0.text }}
+
                     </span>
                     
                     <span id="det-next" class="icon clickable big nav"> > </span>
@@ -75,6 +75,10 @@
             <a href="/deletesheet/{{sheet.id}}" id="remove-yes" class="clickable dark" id="back"> YES, REMOVE IT! </a>
         </div>
     </div>
-    <x id="data-facts" class="hidden">{{data}}</x>
+    <x id="data-facts" class="hidden">
+        {% for fact in facts %}
+        {{ fact.text }};
+        {% endfor %}
+    </x>
     <x class="hidden" id="sheet-id">{{ id }}</x>
     {% endblock content %}

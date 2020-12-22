@@ -54,10 +54,15 @@ initLists();
 /*----- functions -----------------------------------------------------------*/ 
 function initLists()
 {
-  let facts =getElemById("data-facts").innerText;
+  let facts =getElemById("data-facts").innerText.trim();
+  console.log(facts,"-------");
   facts = facts.replaceAll("'",'');
-  factsArray = facts.substring(2, facts.length-2).split(",");
-  console.log(factsArray, factsArray.length);
+  // factsArray = facts.substring(2, facts.length-2).split(",");
+  factsArray = facts.split(";");
+  for(fact of factsArray ){fact = fact.trim()}
+  console.log(factsArray[0], factsArray[0].length);
+  console.log(factsArray[1], factsArray[1].length);
+    console.log(factsArray [2], factsArray[2].length);
 }
 
 /**-------------------------------
@@ -103,6 +108,9 @@ function linkAreaClick(e)
 function saveSheet()
 {
   console.log("SAVE")
+  let note = getElemById("fact-note").value;
+ // let href = getElemById("save").getAttribute("href");
+  getElemById("save").href += note;
 }
 /**-------------------------------
  *  showNextFact() Will be run 
