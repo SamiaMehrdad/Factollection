@@ -39,7 +39,9 @@
                 <!-- </div> -->
             </div>
             <div id="top-label-note" class="orange-bar left">Notes
-               <input type='text' id="fact-note" name="notes" value = "{{ sheet.note }}" >
+               <textarea id="fact-note" name="notes" value = "{{ sheet.note }}" >
+                {{ sheet.note }}
+               </textarea>
             </div>
             <div id="top-label-links" class="orange-bar left">Links
             <input id="add-link" type="submit" class="clickable link" value="+">    

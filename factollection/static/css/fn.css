@@ -226,7 +226,10 @@ a{
 #about-random{
     /* outline: 1px solid blue; */
     display: inline-block;
-    position: absolute;
+    position: fixed;
+    right: 58vw;
+    /* width: 15vw; */
+    text-align: right;
 }
 
 .fix{
@@ -334,6 +337,7 @@ a{
     font-size: 1.5vw;
     font-family: caveat;
     padding: 0 .3vw;
+    color: var(--brn);
 }
 #add-link{
     position: fixed;
@@ -386,12 +390,20 @@ a{
 #index-box{
     position: fixed;
     display: inline-block;
-    width: 26vw;
+    width: 27vw;
     height: 30vw;
     top: 9vh;
     left: 38vw;
     overflow: auto;
 }
+#index-box a{
+    text-decoration: none;
+}
+#index-box span{
+    width: 32vw;
+    overflow: hidden;
+}
+
 .icon{
     color: var(--orng);
     margin: 0 0 0 10px;
@@ -406,7 +418,7 @@ a{
 .det-fact{
     /* display: inline-block; */
     position: fixed;
-    width: 37vw;
+    width: 47vw;
     top: 6vw;
 }
 #det-del-fact{

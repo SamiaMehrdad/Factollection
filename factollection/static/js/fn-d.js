@@ -50,15 +50,17 @@ initLists();
 /*----- functions -----------------------------------------------------------*/ 
 function initLists()
 {
-  let facts =getElemById("data-facts").innerText.trim();
-  console.log(facts,"-------");
+  let facts = getElemById("data-facts").innerText.trim();
+  //console.log(facts,"-------");
   facts = facts.replaceAll("'",'');
-  // factsArray = facts.substring(2, facts.length-2).split(",");
-  factsArray = facts.split(";");
-  for(fact of factsArray ){fact = fact.trim()}
-  console.log(factsArray[0], factsArray[0].length);
-  console.log(factsArray[1], factsArray[1].length);
-    console.log(factsArray [2], factsArray[2].length);
+
+  let tempFacts = facts.split(";");
+  for(fact of tempFacts ){
+    fact = fact.trim();
+   // console.log(fact, fact.length);
+    factsArray.push(fact);
+  }
+
 }
 
 function modalAccepted()
@@ -76,7 +78,7 @@ function modalAccepted()
           linkTitleEl.value+"/"+linkUrlEl.value;
     postData(url, "");
   }
-  console.log("URL=",url);
+  //console.log("URL=",url);
   closeModal();
   location.reload();
   return false;
@@ -119,7 +121,7 @@ function linkAreaClick(e)
     showModal(modalDelEl);
   if( item[0] === 'e' )
   { 
-    console.log("EDIT LINK ID == ", currentLinkId);
+    //console.log("EDIT LINK ID == ", currentLinkId);
     let target = getElemById(currentLinkId);
     linkTitleEl.value = target.innerText;
     linkUrlEl.value = target.getAttribute("href");
@@ -134,7 +136,7 @@ function linkAreaClick(e)
  *-------------------------------*/
 function saveSheet()
 {
-  console.log("SAVE")
+ // console.log("SAVE")
   let note = getElemById("fact-note").value;
  // let href = getElemById("save").getAttribute("href");
   getElemById("save").href += note;
@@ -146,16 +148,17 @@ function saveSheet()
  *-------------------------------*/
 function showNextFact()
 {
-  if( factIndex >= factsArray.length-1 ) 
-    {
-      nextEl.classList.add("hidden");
-      prevEl.classList.remove("hidden");
-    } 
-  else
+  if( factIndex < factsArray.length-1 ) 
     {
       factIndex++;
-      console.log(factsArray[ factIndex ], typeof(factsArray[ factIndex ]));
+      //  console.log(factsArray[ factIndex ], typeof(factsArray[ factIndex ]));
       factEl.innerText = factsArray[ factIndex ];
+      prevEl.classList.remove("hidden");
+    } 
+
+  if( factIndex >= factsArray.length-2 ) 
+    {
+      nextEl.classList.add("hidden");
     }
 }
 /**-------------------------------
@@ -165,16 +168,17 @@ function showNextFact()
  *-------------------------------*/
 function showPrevFact()
 {
-  if( factIndex <= 0 ) 
-    {
-      prevEl.classList.add("hidden");
-      nextEl.classList.remove("hidden");
-    } 
-  else
+  if( factIndex > 0 ) 
     {
       factIndex--;
-      console.log(factsArray[ factIndex ], typeof(factsArray[ factIndex ]));
+      //  console.log(factsArray[ factIndex ], typeof(factsArray[ factIndex ]));
       factEl.innerText = factsArray[ factIndex ];
+
+      nextEl.classList.remove("hidden");
+    } 
+    if( factIndex <= 0 )
+    {
+      prevEl.classList.add("hidden");
     }
 }
 /**-------------------------------
@@ -184,7 +188,7 @@ function showPrevFact()
  *-------------------------------*/
 function removeClicked()
 {
-  console.log("REMOVE");
+ // console.log("REMOVE");
   bottomAttentionEl.classList.remove("hidden");
   bottomBandEl.classList.add("attention");
   bottomContainerEl.classList.add("hidden");
@@ -209,7 +213,7 @@ function removeCancel()
  *-------------------------------*/
 function removeProceed()
 {
-  console.log("REMOVE CONFIRMED");
+  //console.log("REMOVE CONFIRMED");
   postData("/delete/",sheetId);
 }
 /**-------------------------------
@@ -301,4 +305,4 @@ function setEvent(id , type, funcName)
 }
 
 
-console.log("JS-LOADED");
+//console.log("JS-LOADED");
