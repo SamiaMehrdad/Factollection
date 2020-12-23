@@ -4,9 +4,9 @@ Concept:
 In Factollection once you have login you were be able to choose to see a fact base on date, math, or random choice. After seeing your choosen fact you will be able to vhoose to save it or igonre it. you also have the abulty to add notes on the facts you save.
 
 
-![Factollection entry page](https://imgur.com/T4jS9iH)
-![Factollection logged in page](https://imgur.com/vgeDJPA)
-![Factollection view example](https://imgur.com/a/AIkNiPL)
+![Factollection entry page](https://imgur.com/T4jS9iH.png)  
+![Factollection logged in page](https://imgur.com/vgeDJPA.png)
+![Factollection view example](https://imgur.com/a/AIkNiPL.png)
 
 
 You can find Factollection source code on Github.
