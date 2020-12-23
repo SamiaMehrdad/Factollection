@@ -7,24 +7,30 @@ In Factollection once you have login you were be able to choose to see a fact ba
 ![Factollection entry page](https://imgur.com/T4jS9iH.png)  
 ![Factollection logged in page](https://imgur.com/vgeDJPA.png)
 ![Factollection view example](https://i.imgur.com/kOt9otf.png)  
-
+<center>
 
 You can find Factollection source code on Github.
 [Factollection Github](https://github.com/SamiaMehrdad/Factollection.git)
 
-if you want to take it a try, you can try last version here: Factollection runing:
+if you want to take it a try, you can try last version here: [Factollection](https://factollection.herokuapp.com/)
 
-Technical aspects :
-PostgeSQL:
-Python:
-Oauth:
-Github:
-Django:
-API:
-JS, HTML, CSS:
-Next steps :
+# Technical aspects 
+
+|   Backend   |  Front End  |
+|:-----------:|:-----------:|
+| PostgeSQL   | JavaScript  |
+| Python 3    | HTML        |
+| Django      | CSS         |
+| Django Auth |             |
+
+
+## [API](http://numbersapi.com/#42): A big thanks to [David](http://david-hu.com/2012/03/05/announcing-numbers-api.html) and Mack for the api!
+
+
+# Next steps:
 Groups:
 Abilty to share directly with other users:
 
 Copyrights :
 Original concept, name and logo belongs to myself and all materials and resources which may be used for development are free to download and use.
+</center>
