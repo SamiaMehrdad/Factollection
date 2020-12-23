@@ -1,7 +1,7 @@
 # Factollection
 ## Personal fun fact collection
 
-Factollection is where you can get and organyze the fun facts you want!
+Factollection is where you can get and organize the fun facts you want!
 
 ---
 
@@ -21,7 +21,7 @@ In Factollection once you have login you have your own fact sheets collection, a
 ![Factollection entry page](https://imgur.com/T4jS9iH.png)  
 ![Factollection logged in page](https://imgur.com/vgeDJPA.png)
 ![Factollection view example](https://i.imgur.com/kOt9otf.png)  
-<center>
+
 
 You can find Factollection source code on Github.
 [Factollection Github](https://github.com/SamiaMehrdad/Factollection.git)
@@ -32,7 +32,7 @@ if you want to take it a try, you can try last version here: [Factollection](htt
 
 ## History
 
-Originaly, Factollection has been defined as a team based, one week educational project during General Assembly SEI bootcamp 2020-2021. <br>
+Originally, Factollection has been defined as a team based, one week educational project during General Assembly SEI bootcamp 2020-2021. <br>
 
 Team participants are: <br>
 * Rylee Shearer : Api master, Backend engineer<br>
