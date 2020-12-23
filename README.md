@@ -1,6 +1,12 @@
-Factollection
-Where you can get the fun facts you want!
-Concept:
+# Factollection
+## Personal fun fact collection
+
+---
+
+Factollection is where you can get and organyze the fun facts you want!
+
+
+## Concept: 
 In Factollection once you have login you were be able to choose to see a fact base on date, math, or random choice. After seeing your choosen fact you will be able to vhoose to save it or igonre it. you also have the abulty to add notes on the facts you save.
 
 
