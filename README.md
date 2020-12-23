@@ -19,6 +19,16 @@ You can find Factollection source code on Github.
 
 if you want to take it a try, you can try last version here: [Factollection](https://factollection.herokuapp.com/)
 
+---
+## History
+
+Originaly, Factollection has been defined as a team based, one week educational project during General Assmebly SEI bootcamp 2020-2021. <br>
+Team participants are: <br>
+Rylee Shearer : Api master, Backend engineer<br>
+Richard Lummus : Documentation and testing<br>
+Mehrdad Samia : Concept, Design and Frontend<br>
+
+
 # Technical aspects 
 
 |   Backend   |  Front End  |
