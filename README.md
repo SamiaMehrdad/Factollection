@@ -6,7 +6,7 @@ In Factollection once you have login you were be able to choose to see a fact ba
 
 ![Factollection entry page](https://imgur.com/T4jS9iH.png)  
 ![Factollection logged in page](https://imgur.com/vgeDJPA.png)
-![Factollection view example](https://imgur.com/a/AIkNiPL.png)
+![Factollection view example](https://i.imgur.com/kOt9otf.png)  
 
 
 You can find Factollection source code on Github.
