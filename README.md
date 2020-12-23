@@ -14,10 +14,26 @@ In Factollection once you have login you were be able to choose to see a fact ba
 ![Factollection view example](https://i.imgur.com/kOt9otf.png)  
 <center>
 
+![Factollection entry page](https://imgur.com/T4jS9iH.png)  
+![Factollection logged in page](https://imgur.com/vgeDJPA.png)
+![Factollection view example](https://i.imgur.com/kOt9otf.png)  
+<center>
+
 You can find Factollection source code on Github.
 [Factollection Github](https://github.com/SamiaMehrdad/Factollection.git)
 
 if you want to take it a try, you can try last version here: [Factollection](https://factollection.herokuapp.com/)
+
+---
+## History
+
+Originaly, Factollection has been defined as a team based, one week educational project during General Assmebly SEI bootcamp 2020-2021. <br><br>
+
+Team participants are: <br><br>
+Rylee Shearer : Api master, Backend engineer<br>
+Richard Lummus : Documentation and testing<br>
+Mehrdad Samia : Concept, Design and Frontend<br>
+
 
 # Technical aspects 
 
