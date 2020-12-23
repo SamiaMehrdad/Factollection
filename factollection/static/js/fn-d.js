@@ -45,7 +45,7 @@ setEvent("remove-yes","click", removeProceed);
 setEvent("save","click",saveSheet);
 setEvent("link-edit-cancel","click",closeModal);
 setEvent("link-remove-cancel","click",closeModal);
-setEvent("add-link","click",addLink)
+setEvent("add-link","click",addLink);
 for( element of allLinksEl) { 
   setEvent(element.id,"click",linkAreaClick)
 };
@@ -73,7 +73,7 @@ function initLists()
  *-------------------------------*/
 function addLink()
 {
-  getElemById("link-id").value = "10000"; //indicates new link
+  getElemById("link-id").value = "-1"; //indicates new link
   showModal(modalEditEl);
 }
 /**-------------------------------
@@ -97,6 +97,7 @@ function linkAreaClick(e)
     getElemById("link-title").value = target.innerText;
     getElemById("link-url").value = target.getAttribute("href");
     getElemById("link-id").value = id;
+    getElemById("link-id1").value = id;
     showModal(modalEditEl);
   }
 }
