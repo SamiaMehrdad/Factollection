@@ -5,26 +5,19 @@
     <script defer src="{% static 'js/fn-d.js' %}"></script>
     <div id="shade" class="overlay hidden"></div>
     <div id="edit-link" class="modal hidden" >
-        <!-- <form action="[% url 'link_update' cat.id %]" method="POST"> -->
-            <form action="/addlink/{{ id }}" method="POST">
-            {% csrf_token %}
             <h2>Link Properties</h2>  
             <label> Link Description <input name="link_title" id="link-title"></label><br>
             <label> Link Address url <input name="link_url" id="link-url"></label><br>    
-            <input type="submit" value="OK" class="btn">
+            <input id="update-link" type="button" value="OK" class="btn">
             <a id="link-edit-cancel"class="clickable">Cancel</a>   
-            <input id="link-id" name="link_id" class="hidden">
-        </form>
+            <!-- <input id="link-id" name="link_id" class="hidden"> -->
     </div>
     <div id="delete-link" class="modal hidden" >
-        <form action="/removelink/{{ id }}" method="POST">
-            {% csrf_token %}
             <h2>Remove Link </h2><br>    
             <p>Are you sure you want to remove this link from your collection sheet?</p>  
-            <input type="submit" value="Yes, Remove" class="btn" type="button">
+            <input id="del-link" type="button" value="Yes, Remove" class="btn" >
             <a id="link-remove-cancel" class="clickable">Cancel</a> 
-            <input id="link-id1" name="link_id" class="hidden">  
-        </form>
+            <!-- <input id="link-id1" name="link_id" class="hidden">   -->
     </div>
     <div id="middle-up">
         <div id="top-bar">

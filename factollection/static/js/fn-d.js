@@ -13,17 +13,9 @@
 /*----- app's state (variables) -------------------------------------*/
 let factIndex = 0;
 let factsArray = [];
-let sheetModel = {
-  subject: "",
-  note: "",
-  links: [],
-
-
-}
-let linkModel = {
-  title: "",
-  url: "",
-}
+let modalResult = "update"; // otherwise it is create, delete is handled separately
+let sheetId = getElemById("sheet-id").innerText.trim();
+let currentLinkId = 0;
 /*----- cached element references -----------------------------------*/
 const bottomBandEl = getElemById("bottom-band");
 const bottomAttentionEl = getElemById("bottom-attention");
@@ -34,6 +26,8 @@ const prevEl = getElemById("det-prev");
 const shadeEl = getElemById("shade");
 const modalDelEl = getElemById("delete-link");
 const modalEditEl = getElemById("edit-link");
+const linkTitleEl = getElemById("link-title");
+const linkUrlEl = getElemById("link-url")
 const allLinksEl = getElemById("links-area").children;
 // console.log(typeof(allLinksEl));
 /*----- event listeners -----------------------------------------------------*/
@@ -46,6 +40,8 @@ setEvent("save","click",saveSheet);
 setEvent("link-edit-cancel","click",closeModal);
 setEvent("link-remove-cancel","click",closeModal);
 setEvent("add-link","click",addLink);
+setEvent("del-link","click",linkDelAccepted);
+setEvent("update-link","click",modalAccepted);
 for( element of allLinksEl) { 
   setEvent(element.id,"click",linkAreaClick)
 };
@@ -65,6 +61,35 @@ function initLists()
     console.log(factsArray [2], factsArray[2].length);
 }
 
+function modalAccepted()
+{
+  let url = "";
+  if(modalResult === "update" )
+  {
+    url = "/updatelink/"+currentLinkId+"/"+
+          linkTitleEl.value+"/"+linkUrlEl.value;
+    postData(url, "");
+  }
+  else
+  {
+    url = "/addlink/"+sheetId+"/"+
+          linkTitleEl.value+"/"+linkUrlEl.value;
+    postData(url, "");
+  }
+  console.log("URL=",url);
+  closeModal();
+  location.reload();
+  return false;
+}
+
+function linkDelAccepted(e)
+{
+  let url="/deletelink/"+currentLinkId;
+  postData(url, "");
+  closeModal();
+  location.reload();
+  return false;
+}
 /**-------------------------------
  *  addLink() Will be run + button press
  *  This function will show modal panel
@@ -73,7 +98,9 @@ function initLists()
  *-------------------------------*/
 function addLink()
 {
-  getElemById("link-id").value = "-1"; //indicates new link
+  linkUrlEl.value = "";
+  linkTitleEl.value = "";
+  modalResult = "create";
   showModal(modalEditEl);
 }
 /**-------------------------------
@@ -85,19 +112,18 @@ function addLink()
 function linkAreaClick(e)
 {
   let item = e.target.id;
+  currentLinkId = item.substring(1);
  // console.log(e.target.id[0], " CLICKED");
 
   if( item[0] === 'd' )
     showModal(modalDelEl);
   if( item[0] === 'e' )
   { 
-    let id = item.substring(1);
-    console.log("ID == ", id);
-    let target = getElemById(id);
-    getElemById("link-title").value = target.innerText;
-    getElemById("link-url").value = target.getAttribute("href");
-    getElemById("link-id").value = id;
-    getElemById("link-id1").value = id;
+    console.log("EDIT LINK ID == ", currentLinkId);
+    let target = getElemById(currentLinkId);
+    linkTitleEl.value = target.innerText;
+    linkUrlEl.value = target.getAttribute("href");
+    modalResult = "update";
     showModal(modalEditEl);
   }
 }
@@ -184,7 +210,6 @@ function removeCancel()
 function removeProceed()
 {
   console.log("REMOVE CONFIRMED");
-  let sheetId = getElemById("sheet-id").innerText;
   postData("/delete/",sheetId);
 }
 /**-------------------------------

@@ -123,6 +123,7 @@ def add_fact (request, fact_text, sub, fact_type):
 def add_link (request, sheet_id, link_text, link_url):
     sheet = UserSheet.objects.get(auth_user = request.user.id, id = sheet_id)
     new_link = Link.objects.create(user_sheet = sheet, title = link_text, url = link_url)
+    print("New Link added to sheet #",sheet.id)
     return redirect(f'/details/{sheet.id}')
 
 @login_required(login_url='home')
