@@ -14,15 +14,6 @@ In Factollection once you have login you have your own fact sheets collection, a
 ![Factollection view example](https://i.imgur.com/kOt9otf.png)  
 
 
-![Factollection entry page](https://imgur.com/T4jS9iH.png)  
-![Factollection logged in page](https://imgur.com/vgeDJPA.png)
-![Factollection view example](https://i.imgur.com/kOt9otf.png)  
-
-![Factollection entry page](https://imgur.com/T4jS9iH.png)  
-![Factollection logged in page](https://imgur.com/vgeDJPA.png)
-![Factollection view example](https://i.imgur.com/kOt9otf.png)  
-
-
 You can find Factollection source code on Github.
 [Factollection Github](https://github.com/SamiaMehrdad/Factollection.git)
 
